@@ -17,6 +17,7 @@ import time
 from sparsify.auto.api.args import APIArgs
 from sparsify.auto.configs import APIConfigCreator
 from sparsify.auto.tasks import TaskRunner
+from tensorboard import program
 
 
 def main():
@@ -44,6 +45,13 @@ def main():
         if config is None:
             config = APIConfigCreator.get_config(api_args)
             training_start_time = time.time()  # start training time after config init
+
+            # launch tensorboard server
+            tb = program.TensorBoard()
+            tb.configure(argv=[None, "--logdir", config.log_directory])
+            url = tb.launch()
+            print(f"TensorBoard listening on {url}")
+
         else:
             config = APIConfigCreator.update_hyperparameters(
                 config, runner_outputs.metrics

@@ -48,6 +48,14 @@ class SparsificationTrainingConfig(BaseModel):
         title="save_directory",
         description="Absolute path to save directory",
     )
+    log_directory: Optional[str] = Field(
+        title="save_directory",
+        description=(
+            "Absolute path to log directory. Defaults to ./logging, relative to save "
+            "directory"
+        ),
+        default=None,
+    )
     distill_teacher: Optional[str] = Field(
         title="distil_teacher",
         description="optional path to a distillation teacher for training",

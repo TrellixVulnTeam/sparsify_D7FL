@@ -19,6 +19,7 @@ entrypoint API
 """
 
 
+import os
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
@@ -212,6 +213,8 @@ class APIConfigCreator(ABC):
             task=self._api_args.task,
             dataset=self._api_args.dataset,
             save_directory=self._api_args.save_directory,
+            log_directory=self._api_args.log_directory
+            or os.path.join(self._api_args.save_directory, "logging"),
             distill_teacher=self._api_args.distill_teacher,  # optionally set w/ model
             recipe_args=self._api_args.recipe_args,  # optionally set with recipe
             kwargs=self._api_args.kwargs,  # optionally built along config

@@ -21,9 +21,14 @@ from pydantic import BaseModel, Field, validator
 from sparsify.utils import TASK_REGISTRY
 
 
-__all__ = ["APIArgs", "Metrics", "APIOutput", "USER_OUT_DIRECTORY"]
+__all__ = [
+    "APIArgs",
+    "Metrics",
+    "APIOutput",
+    "DEFAULT_USER_OUT_DIRECTORY",
+]
 
-USER_OUT_DIRECTORY = "./output"
+DEFAULT_USER_OUT_DIRECTORY = "./output"
 
 
 class APIArgs(BaseModel):
@@ -42,7 +47,15 @@ class APIArgs(BaseModel):
     save_directory: str = Field(
         title="save_directory",
         description="Absolute path to save directory",
-        default=USER_OUT_DIRECTORY,
+        default=DEFAULT_USER_OUT_DIRECTORY,
+    )
+    log_directory: Optional[str] = Field(
+        title="save_directory",
+        description=(
+            "Absolute path to log directory. Defaults to ./logging, relative to save "
+            "directory"
+        ),
+        default=None,
     )
     performance: Union[str, float] = Field(
         title="performance",

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from sparsify.auto import USER_OUT_DIRECTORY
+from sparsify.auto import DEFAULT_USER_OUT_DIRECTORY
 from sparsify.auto.configs import SparsificationTrainingConfig
 
 
@@ -38,7 +38,7 @@ def test_serialize_sparsificaiton_config_yaml():
         task=task,
         base_model=model_path,
         dataset=data_path,
-        save_directory=USER_OUT_DIRECTORY,
+        save_directory=DEFAULT_USER_OUT_DIRECTORY,
         recipe=recipe,
         recipe_args=recipe_args,
         distill_teacher=distill_teacher,
@@ -66,7 +66,7 @@ def test_serialize_sparsificaiton_config_yaml():
     assert (
         sparsification_config_obj.save_directory
         == sparsification_config_reloaded.save_directory
-        == USER_OUT_DIRECTORY
+        == DEFAULT_USER_OUT_DIRECTORY
     )
     assert (
         sparsification_config_obj.recipe
